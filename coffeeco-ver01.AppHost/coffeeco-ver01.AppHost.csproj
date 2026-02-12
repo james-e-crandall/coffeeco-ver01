@@ -1,0 +1,20 @@
+<Project Sdk="Aspire.AppHost.Sdk/13.1.0">
+
+  <ItemGroup>
+    <ProjectReference Include="..\CoffeeCo.Bff\CoffeeCo.Bff.csproj" />
+    <ProjectReference Include="..\CoffeeCo.UIApi\CoffeeCo.UIApi.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Aspire.Hosting.JavaScript" Version="13.1.0" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <UserSecretsId>7b9ec0fd-1ee1-4564-9029-4f53efe0506d</UserSecretsId>
+  </PropertyGroup>
+
+</Project>

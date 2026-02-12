@@ -1,0 +1,35 @@
+    <mat-toolbar>
+      <button matIconButton [matMenuTriggerFor]="menu" >
+        <span class="material-symbols-outlined">menu</span>
+      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item routerLink="/">
+          <mat-icon>home</mat-icon>
+          <span>Coffe Co.</span>
+        </button>
+        <button mat-menu-item routerLink="/menu">
+          <mat-icon fontSet="material-symbols-outlined">coffee</mat-icon>
+          <span>Menu</span>
+        </button>
+        <button mat-menu-item routerLink="/rewards">
+          <mat-icon fontSet="material-symbols-outlined">loyalty</mat-icon>
+          <span>Rewards</span>
+        </button>
+        <button mat-menu-item routerLink="/gift">
+          <mat-icon fontSet="material-symbols-outlined">redeem</mat-icon>
+          <span>Gift Cards</span>
+        </button>
+        <button mat-menu-item routerLink="/store-locator">
+          <mat-icon>pin_drop</mat-icon>
+          <span>Find a store</span>
+        </button>
+        <button mat-menu-item routerLink="/Sign in">
+          <mat-icon fontSet="material-symbols-outlined">login</mat-icon>
+          <span>Sign in</span>
+        </button>
+        <button mat-menu-item routerLink="/Join now">
+          <mat-icon fontSet="material-symbols-outlined">person_add</mat-icon>
+          <span>Join now</span>
+        </button>
+      </mat-menu>
+    </mat-toolbar>

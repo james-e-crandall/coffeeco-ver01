@@ -1,0 +1,6 @@
+mat-toolbar {
+  width: 100%;
+  display: grid;
+  grid-template-columns: auto auto auto auto 1fr 1fr 1fr auto auto auto;
+  justify-content: space-evenly;
+}
