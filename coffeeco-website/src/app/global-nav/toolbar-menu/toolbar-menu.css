@@ -1,6 +1,20 @@
 mat-toolbar {
   width: 100%;
   display: grid;
+  grid-template-columns: auto auto;
+  justify-content: space-between;
+}
+
+.left-buttons {
+  width: 100%;
+  display: grid;
+  grid-template-columns: auto;
+  justify-content: left;
+}
+
+.right-buttons {
+  width: 100%;
+  display: grid;
   grid-template-columns: auto;
   justify-content: right;
 }
