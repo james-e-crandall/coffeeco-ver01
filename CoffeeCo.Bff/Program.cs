@@ -50,18 +50,24 @@ builder.Services.AddAuthorization();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+app.UseDefaultFiles();
+app.MapStaticAssets();
 
+// Configure the HTTP request pipeline.
 app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseBff();
 app.UseAuthorization();
 app.MapBffManagementEndpoints();
 
-// app.UseDefaultFiles();
-// app.MapStaticAssets();
-
 HealthEndpoints.RegisterEndpoints(app);
+
+var uiapi = builder.Configuration.GetValue<string>("UIAPI_HTTP");
+if(!string.IsNullOrEmpty(uiapi))
+{
+    app.MapRemoteBffApiEndpoint("/uiapi", new Uri(uiapi));
+}
+
 
 app.MapFallbackToFile("/index.html");
 

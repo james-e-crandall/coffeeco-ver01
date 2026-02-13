@@ -2,6 +2,12 @@
 
   <ItemGroup>
     <ProjectReference Include="..\coffeeco-ver01.ServiceDefaults\coffeeco-ver01.ServiceDefaults.csproj" />
+    <ProjectReference Include="..\CoffeeCo.UILib\CoffeeCo.UILib.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Aspire.Microsoft.EntityFrameworkCore.SqlServer" Version="13.1.1" />
+    <PackageReference Include="Riok.Mapperly" Version="4.3.1" />
   </ItemGroup>
 
   <PropertyGroup>

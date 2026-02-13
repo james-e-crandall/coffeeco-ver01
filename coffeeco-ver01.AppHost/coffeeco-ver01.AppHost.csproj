@@ -1,12 +1,15 @@
-<Project Sdk="Aspire.AppHost.Sdk/13.1.0">
+<Project Sdk="Aspire.AppHost.Sdk/13.1.1">
 
   <ItemGroup>
     <ProjectReference Include="..\CoffeeCo.Bff\CoffeeCo.Bff.csproj" />
     <ProjectReference Include="..\CoffeeCo.UIApi\CoffeeCo.UIApi.csproj" />
+    <ProjectReference Include="..\CoffeeCo.UI.MigrationService\CoffeeCo.UI.MigrationService.csproj" />
+    <ProjectReference Include="..\CoffeeCo.UI.MigrationService2\CoffeeCo.UI.MigrationService2.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Aspire.Hosting.JavaScript" Version="13.1.0" />
+    <PackageReference Include="Aspire.Hosting.JavaScript" Version="13.1.1" />
+    <PackageReference Include="Aspire.Hosting.SqlServer" Version="13.1.1" />
   </ItemGroup>
 
   <PropertyGroup>
