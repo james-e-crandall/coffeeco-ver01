@@ -8,17 +8,15 @@ import { httpResource, HttpResourceRef } from '@angular/common/http';
 export class HomeService {
 
   homeItems: HomeItem[] = [
-    { text: 'Espresso' },
-    { text: 'Cappuccino' },
-    { text: 'Latte' },
-    { text: 'Americano' },
+    { text: `It's a great day for coffee` },
+    { text: `'Start An order'` },
   ];
 
   homeRows: HomeRow[] = [
     { homeItems: this.homeItems },
   ];
 
-  homeList: HomeList = { cols: 3, homeRows: this.homeRows };
+  homeList: HomeList = { cols: 2, homeRows: this.homeRows };
 
   GetHomeListCurrent() : HttpResourceRef<HomeList | undefined> {
     return httpResource<HomeList>(
@@ -29,6 +27,26 @@ export class HomeService {
         },
       }),
       { parse: (response: unknown): HomeList => HomeListSchema.parse(response) }
+    );
+  }
+
+  GetHomeListCurrent2() : HttpResourceRef<HomeList | undefined> {
+    return httpResource<HomeList>(
+      () => ({
+        url: `/uiapi/Home/HomeLists/current`,
+        headers: {
+          'x-csrf': '1',
+        },
+      }),
+      { parse: (response: unknown): HomeList => {
+        //return HomeListSchema.parse(response);
+        const result = HomeListSchema.safeParse(response);
+        if (!result.success) {
+          return this.homeList;
+        } else {
+          return result.data;
+        }
+      } }
     );
   }
 

@@ -1,5 +1,6 @@
 using System.Diagnostics;
 using CoffeeCo.UILib.Data;
+using CoffeeCo.UILib.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace CoffeeCo.UI.MigrationService2;
@@ -22,6 +23,7 @@ public class Worker(
             var dbContext = scope.ServiceProvider.GetRequiredService<UIConfigContext>();
 
             await RunMigrationAsync(dbContext, stoppingToken);
+            await SeedDataAsync(dbContext, stoppingToken);
         }
         catch (Exception ex)
         {
@@ -42,5 +44,31 @@ public class Worker(
             await dbContext.Database.MigrateAsync(cancellationToken);
         });
     }
+
+    private static async Task SeedDataAsync(
+        UIConfigContext dbContext, CancellationToken cancellationToken)
+    {
+
+
+        var strategy = dbContext.Database.CreateExecutionStrategy();
+        await strategy.ExecuteAsync(async () =>
+        {
+            // Seed the database
+            Console.WriteLine("Seeding database...");
+            await using var transaction = await dbContext.Database
+                .BeginTransactionAsync(cancellationToken);
+            
+            await dbContext.HomeItems.AddAsync(SeedData.HomeItem, cancellationToken);
+            await dbContext.HomeRows.AddAsync(SeedData.HomeRow, cancellationToken);
+            await dbContext.HomeLists.AddAsync(SeedData.HomeList, cancellationToken);
+
+            //await dbContext.HomeItems.AddRangeAsync(firstHomeRow.HomeItems, cancellationToken);
+            //await dbContext.HomeRows.AddRangeAsync(firstHomeList.HomeRows, cancellationToken);
+            //wait dbContext.HomeLists.AddAsync(firstHomeList, cancellationToken);
+            await dbContext.SaveChangesAsync(cancellationToken);
+            await transaction.CommitAsync(cancellationToken);
+        });
+    }
+
 
 }

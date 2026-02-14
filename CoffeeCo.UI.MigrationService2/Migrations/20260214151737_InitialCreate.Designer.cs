@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CoffeeCo.UI.MigrationService2.Migrations
 {
     [DbContext(typeof(UIConfigContext))]
-    [Migration("20260213151429_InitialCreate")]
+    [Migration("20260214151737_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -45,14 +45,6 @@ namespace CoffeeCo.UI.MigrationService2.Migrations
                     b.HasIndex("HomeRowId");
 
                     b.ToTable("HomeItems");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            HomeRowId = 1,
-                            Text = "Hello World"
-                        });
                 });
 
             modelBuilder.Entity("CoffeeCo.UILib.Models.HomeList", b =>
@@ -81,17 +73,6 @@ namespace CoffeeCo.UI.MigrationService2.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("HomeLists");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Active = true,
-                            Cols = 1,
-                            Created = new DateTime(2026, 2, 13, 15, 14, 28, 855, DateTimeKind.Utc).AddTicks(9285),
-                            StartDate = new DateTime(2026, 2, 13, 15, 14, 28, 855, DateTimeKind.Utc).AddTicks(9036),
-                            Updated = new DateTime(2026, 2, 13, 15, 14, 28, 855, DateTimeKind.Utc).AddTicks(9377)
-                        });
                 });
 
             modelBuilder.Entity("CoffeeCo.UILib.Models.HomeRow", b =>
@@ -110,13 +91,6 @@ namespace CoffeeCo.UI.MigrationService2.Migrations
                     b.HasIndex("HomeListId");
 
                     b.ToTable("HomeRows");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            HomeListId = 1
-                        });
                 });
 
             modelBuilder.Entity("CoffeeCo.UILib.Models.HomeItem", b =>

@@ -67,21 +67,6 @@ namespace CoffeeCo.UI.MigrationService2.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
-            migrationBuilder.InsertData(
-                table: "HomeLists",
-                columns: new[] { "Id", "Active", "Cols", "Created", "StartDate", "Updated" },
-                values: new object[] { 1, true, 1, new DateTime(2026, 2, 13, 15, 14, 28, 855, DateTimeKind.Utc).AddTicks(9285), new DateTime(2026, 2, 13, 15, 14, 28, 855, DateTimeKind.Utc).AddTicks(9036), new DateTime(2026, 2, 13, 15, 14, 28, 855, DateTimeKind.Utc).AddTicks(9377) });
-
-            migrationBuilder.InsertData(
-                table: "HomeRows",
-                columns: new[] { "Id", "HomeListId" },
-                values: new object[] { 1, 1 });
-
-            migrationBuilder.InsertData(
-                table: "HomeItems",
-                columns: new[] { "Id", "HomeRowId", "Text" },
-                values: new object[] { 1, 1, "Hello World" });
-
             migrationBuilder.CreateIndex(
                 name: "IX_HomeItems_HomeRowId",
                 table: "HomeItems",
