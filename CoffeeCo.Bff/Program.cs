@@ -65,7 +65,12 @@ HealthEndpoints.RegisterEndpoints(app);
 var uiapi = builder.Configuration.GetValue<string>("UIAPI_HTTP");
 if(!string.IsNullOrEmpty(uiapi))
 {
+    app.Logger.LogInformation("Mapping remote BFF API endpoint to {UIAPI_HTTP}", uiapi);
     app.MapRemoteBffApiEndpoint("/uiapi", new Uri(uiapi));
+}
+else
+{
+    app.Logger.LogWarning("UIAPI_HTTP configuration value is not set. Remote BFF API endpoint will not be mapped.");
 }
 
 

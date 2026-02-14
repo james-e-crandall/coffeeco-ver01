@@ -1,4 +1,4 @@
-import { HomeItemDirective } from './home-item-directive';
+import { HomeItemDirective } from './home-directive';
 
 describe('HomeItemDirective', () => {
   it('should create an instance', () => {

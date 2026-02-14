@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { HomeItemGridList } from './home-item-grid-list';
+import { HomeItemGridList } from './home-grid-list';
 
 describe('HomeItemGridList', () => {
   let component: HomeItemGridList;

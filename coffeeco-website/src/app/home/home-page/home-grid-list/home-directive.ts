@@ -1,5 +1,5 @@
 import { Directive, input } from '@angular/core';
-import { HomeItem } from './home-item';
+import { HomeItem } from './home-list.schema';
 
 @Directive({
   selector: '[coffeecoHomeItemDirective]'

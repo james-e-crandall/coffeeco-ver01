@@ -1,4 +1,4 @@
-const PROXY_CONFIG = [
+module.exports = [
   {
     context: [
       "/bff",
@@ -8,11 +8,10 @@ const PROXY_CONFIG = [
       "/signout-callback-oidc",
       "/signout-callback-oidc/*",
       "/uiapi",
-      "/uiapi/*"
+      "/uiapi/*",
     ],
-    target: process.env["services__buf__https__0"],
+    target:  process.env["services__bff__https__0"] ||
+      process.env["services__bff__http__0"],
     secure: false,
-  }
-];
-
-module.exports = PROXY_CONFIG;
+  },
+]

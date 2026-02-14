@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import { HomeItemGridList } from './home-item-grid-list/home-item-grid-list';
+import { HomeGridList } from './home-grid-list/home-grid-list';
 
 @Component({
   selector: 'coffeeco-home-page',
-  imports: [HomeItemGridList],
+  imports: [HomeGridList],
   templateUrl: './home-page.html',
   styleUrl: './home-page.css',
 })

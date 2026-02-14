@@ -1,0 +1,24 @@
+
+@if (homeListResource.isLoading()) {
+      <p>Loading user data...</p>
+    } @else if (homeListResource.error()) {
+      <p>Error: {{ homeListResource.error() }}</p>
+      <div>Could not load user information: {{ homeListResource.error()?.message }}</div>
+    } @else if (homeListResource.hasValue()) {
+
+      <mat-grid-list cols="homeListResource.value().cols" rowHeight="10em" gutterSize="1em">
+        @for (row of homeListResource.value().homeRows; track $index) {
+            <mat-grid-tile [colspan]="row.homeItems.length">
+              @for (item of row.homeItems; track $index) {
+                <div>
+                  {{item.text}}
+                </div>
+              }
+            </mat-grid-tile>
+        }
+
+      </mat-grid-list>
+    }
+
+
+

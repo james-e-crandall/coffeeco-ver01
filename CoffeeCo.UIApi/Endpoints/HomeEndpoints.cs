@@ -17,16 +17,28 @@ public static class HomeEndpoints
 
         var homeItems = app.MapGroup("/home");
 
-        homeItems.MapGet("/GetHomeItems", GetHomeItems);
+        homeItems.MapGet("/HomeLists/all", GetAll);
+        homeItems.MapGet("/HomeLists/current", GetCurrent);
 
-        static async Task<Results<Ok<List<HomeListDto>>, BadRequest<string>>> GetHomeItems([FromServices] ILogger<Program> logger, UIConfigContext context)
+        static async Task<Results<Ok<List<HomeListDto>>, BadRequest<string>>> GetAll([FromServices] ILogger<Program> logger, UIConfigContext context)
+        {
+            var results = context.HomeLists
+                .Include(x => x.HomeRows)
+                .ProjectToDto().ToList();
+            return TypedResults.Ok(results); 
+        }
+
+        static async Task<Results<Ok<HomeListDto>, BadRequest<string>>> GetCurrent([FromServices] ILogger<Program> logger, UIConfigContext context)
         {
             var results = context.HomeLists
                 .Include(x => x.HomeRows)
                 .ThenInclude(x => x.HomeItems)
-                .ProjectToDto().ToList();
+                .Where(x => x.Active)
+                .OrderByDescending(x => x.StartDate)
+                .ProjectToDto().FirstOrDefault();
             return TypedResults.Ok(results); 
         }
+
 
     }
 
