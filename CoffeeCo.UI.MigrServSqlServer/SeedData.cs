@@ -1,15 +1,15 @@
 ﻿using CoffeeCo.UILib.Models;
 
-namespace CoffeeCo.MigrationsLib;
+namespace CoffeeCo.UI.MigrServSqlServer;
 
 public class SeedData 
 {
     public static HomeItem[] HomePageStart = new HomeItem[] { 
-        new HomeItem { Id = 1, Text = "Espresso", },
-        new HomeItem { Id = 2, Text = "Latte", },
-        new HomeItem { Id = 3, Text = "Cappuccino",  },
-        new HomeItem { Id = 4, Text = "Americano", },
-        new HomeItem { Id = 5, Text = "Mocha", }
+        new HomeItem { Text = "Espresso", },
+        new HomeItem { Text = "Latte", },
+        new HomeItem { Text = "Cappuccino",  },
+        new HomeItem { Text = "Americano", },
+        new HomeItem { Text = "Mocha", }
     };
 
     // public static HomeItem[] HomePageStart = new HomeItem[] { 

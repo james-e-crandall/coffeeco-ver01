@@ -1,5 +1,5 @@
 
-using CoffeeCo.MigrationsLib;
+using CoffeeCo.UI.MigrServSqlServer;
 using CoffeeCo.UILib.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;

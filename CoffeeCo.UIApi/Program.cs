@@ -7,9 +7,6 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.AddServiceDefaults();
 
-// builder.Services.AddDbContextPool<UIConfigContext>(options =>
-//     options.UseSqlServer(builder.Configuration.GetConnectionString("sqldbUIConfig"));
-
 builder.AddSqlServerDbContext<UIConfigContext>(connectionName: "sqldbUIConfig");
 
 var app = builder.Build();

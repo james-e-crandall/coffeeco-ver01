@@ -4,10 +4,12 @@
     <ProjectReference Include="..\CoffeeCo.Bff\CoffeeCo.Bff.csproj" />
     <ProjectReference Include="..\CoffeeCo.UIApi\CoffeeCo.UIApi.csproj" />
     <ProjectReference Include="..\CoffeeCo.UI.MigrServSqlServer\CoffeeCo.UI.MigrServSqlServer.csproj" />
+    <ProjectReference Include="..\CoffeeCo.UI.MigrServPostgresql\CoffeeCo.UI.MigrServPostgresql.csproj" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Aspire.Hosting.JavaScript" Version="13.1.1" />
+    <PackageReference Include="Aspire.Hosting.PostgreSQL" Version="13.1.1" />
     <PackageReference Include="Aspire.Hosting.SqlServer" Version="13.1.1" />
   </ItemGroup>
 

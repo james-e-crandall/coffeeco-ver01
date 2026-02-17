@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
-namespace CoffeeCo.MigrationsLib;
+namespace CoffeeCo.UI.MigrServSqlServer;
 
 public class Worker(
     IServiceProvider serviceProvider,
@@ -25,7 +25,7 @@ public class Worker(
             var dbContext = scope.ServiceProvider.GetRequiredService<UIConfigContext>();
 
             await RunMigrationAsync(dbContext, stoppingToken);
-            //await SeedDataAsync(dbContext, stoppingToken);
+            await SeedDataAsync(dbContext, stoppingToken);
         }
         catch (Exception ex)
         {
@@ -69,6 +69,8 @@ public class Worker(
 
     private static async Task CreateHomeListAsync(UIConfigContext dbContext, CancellationToken cancellationToken)
     {
+        Console.WriteLine("CreateHomeListAsync...");
+
         var homeList = new HomeList
         {
             Cols = 2,
@@ -77,7 +79,7 @@ public class Worker(
             Created = DateTime.UtcNow,
             Updated = DateTime.UtcNow
         };
-
+        Console.WriteLine("HomeLists.AddAsync");
         await dbContext.HomeLists.AddAsync(homeList, cancellationToken);
 
         foreach(var homeItem in SeedData.HomePageStart)
@@ -90,8 +92,9 @@ public class Worker(
 
             homeRow.HomeItems.Add(homeItem);
             homeList.HomeRows.Add(homeRow);
-
+            Console.WriteLine("HomeItems.AddAsync");
             await dbContext.HomeItems.AddAsync(homeItem, cancellationToken);
+            Console.WriteLine("HomeRows.AddAsync");
             await dbContext.HomeRows.AddAsync(homeRow, cancellationToken);
         }
 

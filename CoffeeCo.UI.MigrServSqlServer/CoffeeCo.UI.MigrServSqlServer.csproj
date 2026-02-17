@@ -19,6 +19,5 @@
   <ItemGroup>
     <ProjectReference Include="..\coffeeco-ver01.ServiceDefaults\coffeeco-ver01.ServiceDefaults.csproj" />
     <ProjectReference Include="..\CoffeeCo.UILib\CoffeeCo.UILib.csproj" />
-    <ProjectReference Include="..\CoffeeCo.MigrationsLib\CoffeeCo.MigrationsLib.csproj" />
   </ItemGroup>
 </Project>
