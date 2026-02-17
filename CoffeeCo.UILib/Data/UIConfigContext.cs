@@ -17,9 +17,9 @@ public partial class UIConfigContext : DbContext
     {
         base.OnModelCreating(modelBuilder); 
 
-        // modelBuilder.ApplyConfiguration(new HomeListMap());
-        // modelBuilder.ApplyConfiguration(new HomeRowMap());
-        // modelBuilder.ApplyConfiguration(new HomeItemMap());
+        modelBuilder.ApplyConfiguration(new HomeListMap());
+        modelBuilder.ApplyConfiguration(new HomeRowMap());
+        modelBuilder.ApplyConfiguration(new HomeItemMap());
     }
 
 }

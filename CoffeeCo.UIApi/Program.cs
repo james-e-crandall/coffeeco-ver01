@@ -7,42 +7,10 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.AddServiceDefaults();
 
-builder.AddSqlServerDbContext<UIConfigContext>(connectionName: "sqldbUIConfig",
-    configureDbContextOptions: options =>
-{
-    // if (builder.Environment.IsDevelopment())
-    // {
-    //     options.UseSeeding((context, _) =>
-    //     {
-    //         var homeList = context.Set<HomeList>()
-    //             .FirstOrDefault(t => t.Id == 1);
-    //         if (homeList is null)
-    //         {
-    //             context.Set<HomeList>().Add(new HomeList
-    //             {
-    //                 Id = 1
-    //             });
-    //             context.SaveChanges();
-    //         }
+// builder.Services.AddDbContextPool<UIConfigContext>(options =>
+//     options.UseSqlServer(builder.Configuration.GetConnectionString("sqldbUIConfig"));
 
-    //     });
-
-    //     options.UseAsyncSeeding(async (context, _, cancellationToken) =>
-    //     {
-    //         var homeList = await context.Set<HomeList>()
-    //             .FirstOrDefaultAsync(t => t.Id == 1, cancellationToken);
-    //         if (homeList is null)
-    //         {
-    //             context.Set<HomeList>().Add(new HomeList
-    //             {
-    //                 Id = 1
-    //             });
-    //             await context.SaveChangesAsync(cancellationToken);
-    //         }
-    //     });
-    // }
-});
-
+builder.AddSqlServerDbContext<UIConfigContext>(connectionName: "sqldbUIConfig");
 
 var app = builder.Build();
 

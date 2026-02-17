@@ -3,8 +3,7 @@
   <ItemGroup>
     <ProjectReference Include="..\CoffeeCo.Bff\CoffeeCo.Bff.csproj" />
     <ProjectReference Include="..\CoffeeCo.UIApi\CoffeeCo.UIApi.csproj" />
-    <ProjectReference Include="..\CoffeeCo.UI.MigrationService\CoffeeCo.UI.MigrationService.csproj" />
-    <ProjectReference Include="..\CoffeeCo.UI.MigrationService2\CoffeeCo.UI.MigrationService2.csproj" />
+    <ProjectReference Include="..\CoffeeCo.UI.MigrServSqlServer\CoffeeCo.UI.MigrServSqlServer.csproj" />
   </ItemGroup>
 
   <ItemGroup>

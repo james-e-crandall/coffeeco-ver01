@@ -2,8 +2,10 @@ using System.Diagnostics;
 using CoffeeCo.UILib.Data;
 using CoffeeCo.UILib.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 
-namespace CoffeeCo.UI.MigrationService2;
+namespace CoffeeCo.MigrationsLib;
 
 public class Worker(
     IServiceProvider serviceProvider,
@@ -23,7 +25,7 @@ public class Worker(
             var dbContext = scope.ServiceProvider.GetRequiredService<UIConfigContext>();
 
             await RunMigrationAsync(dbContext, stoppingToken);
-            await SeedDataAsync(dbContext, stoppingToken);
+            //await SeedDataAsync(dbContext, stoppingToken);
         }
         catch (Exception ex)
         {
@@ -58,17 +60,43 @@ public class Worker(
             await using var transaction = await dbContext.Database
                 .BeginTransactionAsync(cancellationToken);
             
-            await dbContext.HomeItems.AddAsync(SeedData.HomeItem, cancellationToken);
-            await dbContext.HomeRows.AddAsync(SeedData.HomeRow, cancellationToken);
-            await dbContext.HomeLists.AddAsync(SeedData.HomeList, cancellationToken);
+            await CreateHomeListAsync(dbContext, cancellationToken);
 
-            //await dbContext.HomeItems.AddRangeAsync(firstHomeRow.HomeItems, cancellationToken);
-            //await dbContext.HomeRows.AddRangeAsync(firstHomeList.HomeRows, cancellationToken);
-            //wait dbContext.HomeLists.AddAsync(firstHomeList, cancellationToken);
             await dbContext.SaveChangesAsync(cancellationToken);
             await transaction.CommitAsync(cancellationToken);
         });
     }
+
+    private static async Task CreateHomeListAsync(UIConfigContext dbContext, CancellationToken cancellationToken)
+    {
+        var homeList = new HomeList
+        {
+            Cols = 2,
+            StartDate = DateTime.UtcNow,
+            Active = true,
+            Created = DateTime.UtcNow,
+            Updated = DateTime.UtcNow
+        };
+
+        await dbContext.HomeLists.AddAsync(homeList, cancellationToken);
+
+        foreach(var homeItem in SeedData.HomePageStart)
+        {
+            var homeRow = new HomeRow
+            {
+                HomeList = homeList,
+                HomeItems = { homeItem }
+            };
+
+            homeRow.HomeItems.Add(homeItem);
+            homeList.HomeRows.Add(homeRow);
+
+            await dbContext.HomeItems.AddAsync(homeItem, cancellationToken);
+            await dbContext.HomeRows.AddAsync(homeRow, cancellationToken);
+        }
+
+
+    }   
 
 
 }

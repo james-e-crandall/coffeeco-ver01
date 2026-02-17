@@ -4,16 +4,19 @@ using CoffeeCo.UILib.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace CoffeeCo.UI.MigrationService2.Migrations
+namespace CoffeeCo.UI.MigrServSqlServer.Migrations
 {
     [DbContext(typeof(UIConfigContext))]
-    partial class UIConfigContextModelSnapshot : ModelSnapshot
+    [Migration("20260217014207_InitialCreate")]
+    partial class InitialCreate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -42,6 +45,14 @@ namespace CoffeeCo.UI.MigrationService2.Migrations
                     b.HasIndex("HomeRowId");
 
                     b.ToTable("HomeItems");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            HomeRowId = 1,
+                            Text = "Hello World"
+                        });
                 });
 
             modelBuilder.Entity("CoffeeCo.UILib.Models.HomeList", b =>
@@ -70,6 +81,17 @@ namespace CoffeeCo.UI.MigrationService2.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("HomeLists");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Active = true,
+                            Cols = 2,
+                            Created = new DateTime(2026, 2, 17, 1, 42, 7, 515, DateTimeKind.Utc).AddTicks(5264),
+                            StartDate = new DateTime(2026, 2, 17, 1, 42, 7, 515, DateTimeKind.Utc).AddTicks(5064),
+                            Updated = new DateTime(2026, 2, 17, 1, 42, 7, 515, DateTimeKind.Utc).AddTicks(5352)
+                        });
                 });
 
             modelBuilder.Entity("CoffeeCo.UILib.Models.HomeRow", b =>
@@ -88,6 +110,13 @@ namespace CoffeeCo.UI.MigrationService2.Migrations
                     b.HasIndex("HomeListId");
 
                     b.ToTable("HomeRows");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            HomeListId = 1
+                        });
                 });
 
             modelBuilder.Entity("CoffeeCo.UILib.Models.HomeItem", b =>

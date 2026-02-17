@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace CoffeeCo.UI.MigrationService2.Migrations
+namespace CoffeeCo.UI.MigrServSqlServer.Migrations
 {
     /// <inheritdoc />
     public partial class InitialCreate : Migration
@@ -66,6 +66,21 @@ namespace CoffeeCo.UI.MigrationService2.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
+
+            migrationBuilder.InsertData(
+                table: "HomeLists",
+                columns: new[] { "Id", "Active", "Cols", "Created", "StartDate", "Updated" },
+                values: new object[] { 1, true, 2, new DateTime(2026, 2, 17, 1, 42, 7, 515, DateTimeKind.Utc).AddTicks(5264), new DateTime(2026, 2, 17, 1, 42, 7, 515, DateTimeKind.Utc).AddTicks(5064), new DateTime(2026, 2, 17, 1, 42, 7, 515, DateTimeKind.Utc).AddTicks(5352) });
+
+            migrationBuilder.InsertData(
+                table: "HomeRows",
+                columns: new[] { "Id", "HomeListId" },
+                values: new object[] { 1, 1 });
+
+            migrationBuilder.InsertData(
+                table: "HomeItems",
+                columns: new[] { "Id", "HomeRowId", "Text" },
+                values: new object[] { 1, 1, "Hello World" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_HomeItems_HomeRowId",

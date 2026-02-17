@@ -2,6 +2,7 @@ import { z } from 'zod';
 
 export const HomeItemSchema = z.object({
   text: z.string(),
+
 });
 
 export const HomeItemArraySchema = z.array(HomeItemSchema);

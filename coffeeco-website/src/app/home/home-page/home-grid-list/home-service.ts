@@ -18,6 +18,19 @@ export class HomeService {
 
   homeList: HomeList = { cols: 2, homeRows: this.homeRows };
 
+  // GetHomeListCurrent() : HttpResourceRef<HomeList | undefined> {
+  //   console.log('GetHomeListCurrent called');
+  //   return httpResource<HomeList>(
+  //     () => ({
+  //       url: `/uiapi/Home/HomeLists/current`,
+  //       headers: {
+  //         'x-csrf': '1',
+  //       },
+  //     }),
+  //     { parse: (response: unknown): HomeList => HomeListSchema.parse(response) }
+  //   );
+  // }
+
   GetHomeListCurrent() : HttpResourceRef<HomeList | undefined> {
     return httpResource<HomeList>(
       () => ({
@@ -26,7 +39,14 @@ export class HomeService {
           'x-csrf': '1',
         },
       }),
-      { parse: (response: unknown): HomeList => HomeListSchema.parse(response) }
+      { parse: (response: unknown): HomeList => {
+        //return HomeListSchema.parse(response);
+        console.log('HomeListSchema.parse called');
+        let xzy = HomeListSchema.parse(response);
+        console.log('HomeListSchema.parse called 2');
+        console.log('xzy: ', xzy.cols, xzy.homeRows.length);
+        return xzy;
+      } }
     );
   }
 

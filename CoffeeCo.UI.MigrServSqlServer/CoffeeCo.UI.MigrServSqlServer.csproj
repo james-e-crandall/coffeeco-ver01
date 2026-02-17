@@ -1,10 +1,10 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk.Worker">
 
   <PropertyGroup>
-    <OutputType>Exe</OutputType>
     <TargetFramework>net10.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>dotnet-CoffeeCo.UI.MigrServSqlServer-ecca0054-ecff-4e75-af6e-4527e0819c15</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
@@ -13,11 +13,12 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="10.0.2" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\CoffeeCo.UILib\CoffeeCo.UILib.csproj" />
     <ProjectReference Include="..\coffeeco-ver01.ServiceDefaults\coffeeco-ver01.ServiceDefaults.csproj" />
+    <ProjectReference Include="..\CoffeeCo.UILib\CoffeeCo.UILib.csproj" />
+    <ProjectReference Include="..\CoffeeCo.MigrationsLib\CoffeeCo.MigrationsLib.csproj" />
   </ItemGroup>
-
 </Project>

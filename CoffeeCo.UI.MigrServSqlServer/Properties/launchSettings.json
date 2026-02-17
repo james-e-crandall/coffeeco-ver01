@@ -1,7 +1,7 @@
 ﻿{
   "$schema": "https://json.schemastore.org/launchsettings.json",
   "profiles": {
-    "CoffeeCo.UI.MigrationService2": {
+    "CoffeeCo.UI.MigrServSqlServer": {
       "commandName": "Project",
       "dotnetRunMessages": true,
       "environmentVariables": {

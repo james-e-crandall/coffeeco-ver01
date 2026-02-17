@@ -5,9 +5,11 @@ import { HomeService } from './home-service';
 import { HomeItemDirective } from './home-directive';
 import { HomeList } from  './home-list.schema'
 
+import {MatIconModule} from '@angular/material/icon';
+
 @Component({
   selector: 'coffeeco-home-grid-list',
-  imports: [MatGridListModule],
+  imports: [MatGridListModule, MatIconModule],
   templateUrl: './home-grid-list.html',
   styleUrl: './home-grid-list.css',
 })

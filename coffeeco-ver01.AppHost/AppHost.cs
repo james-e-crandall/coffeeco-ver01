@@ -1,30 +1,55 @@
+using Microsoft.Extensions.Hosting;
+
 var builder = DistributedApplication.CreateBuilder(args);
 
 var bff = builder.AddProject<Projects.CoffeeCo_Bff>("bff")
     .WithHttpHealthCheck("/health");
 
-var sqlUIConfig = builder.AddSqlServer("sqlUIConfig")
+
+
+if (builder.Environment.IsDevelopment())
+{
+    var sqlUIConfig = builder.AddSqlServer("sqlUIConfig")
     .WithDataVolume();
     
-var sqldbUIConfig = sqlUIConfig.AddDatabase("sqldbUIConfig");
+    var sqldbUIConfig = sqlUIConfig.AddDatabase("sqldbUIConfig");
+    var migrationService = builder.AddProject<Projects.CoffeeCo_UI_MigrServSqlServer>("migrationService")
+        .WithReference(sqldbUIConfig)
+        .WaitFor(sqldbUIConfig);
 
-// var migrationService = builder.AddProject<Projects.CoffeeCo_UI_MigrationService>("migration")
-//     .WithReference(sqldbUIConfig)
-//     .WaitFor(sqldbUIConfig);
+    var uiapi = builder.AddProject<Projects.CoffeeCo_UIApi>("uiapi")
+        .WithExternalHttpEndpoints()
+        .WithHttpHealthCheck("/health")
+        .WithReference(migrationService)
+        .WaitForCompletion(migrationService)
+        .WithReference(sqldbUIConfig)
+        .WaitFor(sqldbUIConfig);
 
-var migrationService2 = builder.AddProject<Projects.CoffeeCo_UI_MigrationService2>("migration2")
-    .WithReference(sqldbUIConfig)
-    .WaitFor(sqldbUIConfig);
+    bff.WithReference(uiapi);
 
+}
+else
+{
+    // Add production-ready services
+    var sqlUIConfig = builder.AddSqlServer("sqlUIConfig")
+    .WithDataVolume();
+    
+    var sqldbUIConfig = sqlUIConfig.AddDatabase("sqldbUIConfig");
+    var migrationService = builder.AddProject<Projects.CoffeeCo_UI_MigrServSqlServer>("migrationService")
+        .WithReference(sqldbUIConfig)
+        .WaitFor(sqldbUIConfig);
 
-var uiapi = builder.AddProject<Projects.CoffeeCo_UIApi>("uiapi")
-    .WithExternalHttpEndpoints()
-    .WithHttpHealthCheck("/health")
-    .WithReference(sqldbUIConfig)
-    .WithReference(migrationService2)
-    .WaitForCompletion(migrationService2);
+    var uiapi = builder.AddProject<Projects.CoffeeCo_UIApi>("uiapi")
+        .WithExternalHttpEndpoints()
+        .WithHttpHealthCheck("/health")
+        .WithReference(migrationService)
+        .WaitForCompletion(migrationService)
+        .WithReference(sqldbUIConfig)
+        .WaitFor(sqldbUIConfig);
 
-bff.WithReference(uiapi);
+    bff.WithReference(uiapi);
+}
+
 
 #pragma warning disable ASPIRECERTIFICATES001 // Type is for evaluation purposes only and is subject to change or removal in future updates. Suppress this diagnostic to proceed.
 

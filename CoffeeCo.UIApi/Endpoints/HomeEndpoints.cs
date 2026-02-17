@@ -30,6 +30,11 @@ public static class HomeEndpoints
 
         static async Task<Results<Ok<HomeListDto>, BadRequest<string>>> GetCurrent([FromServices] ILogger<Program> logger, UIConfigContext context)
         {
+            var total = context.HomeLists
+                .Include(x => x.HomeRows)
+                .ProjectToDto().ToList();
+            Console.WriteLine($"Total HomeLists: {total.Count}");
+
             var results = context.HomeLists
                 .Include(x => x.HomeRows)
                 .ThenInclude(x => x.HomeItems)
