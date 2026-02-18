@@ -185,10 +185,108 @@ public class NationalAddressDto
 
     /// <summary>
     ///  Room ( ROOM ) 
-    /// commonly used
+    /// rarely used
     /// </summary>
     [StringLength(75)]
     public string? Room { get; set; }
+
+    /// <summary>
+    ///  Room ( ROOM ) 
+    /// rarely used
+    /// </summary>
+    [StringLength(225)]
+    public string? Addtl_Loc { get; set; }
+
+    /// <summary>
+    ///  Milepost 
+    /// rarely used
+    /// </summary>
+    [StringLength(50)]
+    public string? Milepost { get; set; }
+
+    /// <summary>
+    ///  Address Longitude  
+    /// always used 
+    /// </summary>
+    [Required]
+    public required Long Long { get; set; }
+
+    /// <summary>
+    ///  Milepost 
+    /// always used 
+    /// </summary>
+    [Required]
+    public required Long Lat { get; set; }
+
+    /// <summary>
+    ///  National Grid Coordinates 
+    /// rarely used
+    /// </summary>
+    [StringLength(50)]
+    [Required]
+    public required string NatGrid_Coord { get; set; }
+
+    /// <summary>
+    ///  GUID 
+    /// always used 
+    /// </summary>
+    [Required]
+    public required Guid GUID { get; set; }
+
+    /// <summary>
+    ///  Address Type  
+    /// commonly used
+    /// </summary>
+    [StringLength(50)]
+    public string? Addr_Type { get; set; }
+
+    /// <summary>
+    ///  Address Placement
+    /// commonly used
+    /// </summary>
+    [StringLength(25)]
+    public string? Placement { get; set; }
+
+    /// <summary>
+    ///  Address Source 
+    /// always used 
+    /// </summary>
+    [StringLength(75)]
+    [Required]
+    public required string Source { get; set; }
+
+    /// <summary>
+    ///  Address Authority 
+    /// commonly used
+    /// </summary>
+    [StringLength(75)]
+    public string? AddAuth { get; set; }
+
+    /// <summary>
+    ///  Unique Within
+    /// occasionally used 
+    /// </summary>
+    [StringLength(75)]
+    public string? UniqWithin { get; set; }
+
+    /// <summary>
+    ///  Date Last Updated 
+    /// always used 
+    /// </summary>
+    [Required]
+    public required DateTime LastUpdate { get; set; }
+
+    /// <summary>
+    ///  Effective Date 
+    /// commonly used
+    /// </summary>
+    public DateTime? Effective { get; set; }
+
+    /// <summary>
+    ///  Expiration Date 
+    /// commonly used
+    /// </summary>
+    public DateTime? Expired { get; set; }
 
 
 }
