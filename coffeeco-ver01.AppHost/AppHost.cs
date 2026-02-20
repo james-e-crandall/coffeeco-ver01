@@ -9,11 +9,15 @@ var bff = builder.AddProject<Projects.CoffeeCo_Bff>("bff")
         .WithExternalHttpEndpoints()
         .WithHttpHealthCheck("/health");
 
+    var storeapi = builder.AddProject<Projects.CoffeeCo_StoreApi>("storeapi")
+        .WithExternalHttpEndpoints()
+        .WithHttpHealthCheck("/health");
+
     bff.WithReference(uiapi);
+    bff.WithReference(storeapi);
 
     var sqlUIConfig = builder.AddSqlServer("sqlUIConfig")
     .WithDataVolume();
-
 
     var sqldbUIConfig = sqlUIConfig.AddDatabase("sqldbUIConfig");
     var migrationServicesqlserver = builder.AddProject<Projects.CoffeeCo_UI_MigrServSqlServer>("migrationServicesqlserver")
@@ -25,19 +29,18 @@ var bff = builder.AddProject<Projects.CoffeeCo_Bff>("bff")
         .WithReference(sqldbUIConfig)
         .WaitFor(sqldbUIConfig);
 
-    //  var postgres = builder.AddPostgres("postgres");
-    // var postgresdb = postgres.AddDatabase("postgresdb");
+     var postgres = builder.AddPostgres("postgres");
+    var postgresdb = postgres.AddDatabase("postgresdb");
 
 
-    // var migrationServicepostgresql = builder.AddProject<Projects.CoffeeCo_UI_MigrServPostgresql>("migrationServicepostgresql")
-    //     .WithReference(postgresdb)
-    //     .WaitFor(postgresdb);
+    var migrationServicepostgresql = builder.AddProject<Projects.CoffeeCo_UI_MigrServPostgresql>("migrationServicepostgresql")
+        .WithReference(postgresdb)
+        .WaitFor(postgresdb);
 
-    // uiapi.WithReference(migrationServicepostgresql)
-    //     .WaitForCompletion(migrationServicepostgresql)
-    //     .WithReference(postgresdb)
-    //     .WaitFor(postgresdb);  
-
+    storeapi.WithReference(migrationServicepostgresql)
+        .WaitForCompletion(migrationServicepostgresql)
+        .WithReference(postgresdb)
+        .WaitFor(postgresdb);  
 
 #pragma warning disable ASPIRECERTIFICATES001 // Type is for evaluation purposes only and is subject to change or removal in future updates. Suppress this diagnostic to proceed.
 

@@ -1,6 +1,5 @@
 using System.Diagnostics;
-using CoffeeCo.UILib.Data;
-using CoffeeCo.UILib.Models;
+using CoffeeCo.StoreLib.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -22,7 +21,7 @@ public class Worker(
         try
         {
             using var scope = serviceProvider.CreateScope();
-            var dbContext = scope.ServiceProvider.GetRequiredService<UIConfigContext>();
+            var dbContext = scope.ServiceProvider.GetRequiredService<StoreContext>();
 
             await RunMigrationAsync(dbContext, stoppingToken);
             //await SeedDataAsync(dbContext, stoppingToken);
@@ -37,7 +36,7 @@ public class Worker(
     }
 
     private static async Task RunMigrationAsync(
-        UIConfigContext dbContext, CancellationToken cancellationToken)
+        StoreContext dbContext, CancellationToken cancellationToken)
     {
         var strategy = dbContext.Database.CreateExecutionStrategy();
         await strategy.ExecuteAsync(async () =>

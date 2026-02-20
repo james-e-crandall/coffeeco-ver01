@@ -73,6 +73,16 @@ else
     app.Logger.LogWarning("UIAPI_HTTP configuration value is not set. Remote BFF API endpoint will not be mapped.");
 }
 
+var storeapi = builder.Configuration.GetValue<string>("STOREAPI_HTTP");
+if(!string.IsNullOrEmpty(uiapi))
+{
+    app.Logger.LogInformation("Mapping remote BFF API endpoint to {STOREAPI_HTTP}", storeapi);
+    app.MapRemoteBffApiEndpoint("/storeapi", new Uri(uiapi));
+}
+else
+{
+    app.Logger.LogWarning("STOREAPI_HTTP configuration value is not set. Remote BFF API endpoint will not be mapped.");
+}
 
 app.MapFallbackToFile("/index.html");
 

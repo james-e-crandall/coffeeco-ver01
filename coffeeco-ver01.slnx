@@ -2,6 +2,7 @@
   <Project Path="coffeeco-ver01.AppHost/coffeeco-ver01.AppHost.csproj" />
   <Project Path="coffeeco-ver01.ServiceDefaults/coffeeco-ver01.ServiceDefaults.csproj" />
   <Project Path="CoffeeCo.Bff/CoffeeCo.Bff.csproj" />
+  <Project Path="CoffeeCo.StoreApi/CoffeeCo.StoreApi.csproj" />
   <Project Path="CoffeeCo.StoreLib/CoffeeCo.StoreLib.csproj" />
   <Project Path="CoffeeCo.UI.MigrServPostgresql/CoffeeCo.UI.MigrServPostgresql.csproj" />
   <Project Path="CoffeeCo.UI.MigrServSqlServer/CoffeeCo.UI.MigrServSqlServer.csproj" />
